@@ -62,7 +62,7 @@ def get_path(source, target, d):
     print("Distance: " + str(d[len(source)][len(target)]))
     print("------------")
     print(new_source[::-1])
-    print(path[len(target)::-1])
+    print(path[len(path)-1::-1])
     print(new_target[::-1] + '\n')
 
 
