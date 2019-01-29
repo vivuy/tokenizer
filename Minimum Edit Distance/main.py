@@ -27,40 +27,30 @@ def print_table():
 
 def get_path():
     path = ""
-    i = len(source)
-    j = len(target)
+    i = len(source) #
+    j = len(target) #
 
-    while i != 0 and j != 0:
-        if D[i][j] == D[i-1][j-1]:
+    while not (i == 0 and j == 0):
+        if source[i-1] == target[j-1]:
             path += "M"
             i -= 1
             j -= 1
         else:
-            if j < 0:
+            minimum = min(D[i-1][j], D[i][j-1], D[i-1][j-1])
+            if minimum == D[i-1][j]:
                 path += "D"
                 i -= 1
-            elif i < 0:
+            elif minimum == D[i][j-1]:
                 path += "I"
                 j -= 1
-            else:
-                minimum = min(D[i-1][j], D[i][j-1], D[i-1][j-1])
-                print(D[i-1][j], D[i][j-1], D[i-1][j-1])
-                print(minimum)
-                if minimum == D[i-1][j]:
-                    path += "D"
-                    j -= 1
-                elif minimum == D[i][j-1]:
-                    path += "I"
-                    i -= 1
-                elif minimum == D[i-1][j-1]:
-                    path += "S"
-                    i -= 1
-                    j -= 1
-    return print(path[::-1]);
+            elif minimum == D[i-1][j-1]:
+                path += "S"
+                i -= 1
+                j -= 1
+    return print(path[len(target)::-1])
 
 
 initialize()
 compute()
-print_table()
 get_path()
 print(D[len(source)][len(target)])
