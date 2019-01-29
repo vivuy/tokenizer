@@ -1,9 +1,13 @@
 def initialize(source, target):
+    source = source.lower()
+    target = target.lower()
+
     d = [[0 for a in range(len(target) + 1)] for b in range(len(source) + 1)]
     for i in range(len(source)+1):
         for j in range(len(target)+1):
             d[i][0] = i
             d[0][j] = j
+
     compute(source, target, d)
 
 
@@ -54,13 +58,15 @@ def get_path(source, target, d):
                 new_target += target[j - 1]
                 i -= 1
                 j -= 1
+
     print("Distance: " + str(d[len(source)][len(target)]))
-    print("--------")
+    print("------------")
     print(new_source[::-1])
     print(path[len(target)::-1])
     print(new_target[::-1] + '\n')
 
 
+print()
 initialize("bugs bunny", "big chungus")
 initialize("naruto's son", "boruto's dad")
 initialize("kumakain", "kumain")
