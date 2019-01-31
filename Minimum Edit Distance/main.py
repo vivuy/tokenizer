@@ -15,10 +15,10 @@ def compute(source, target, d):
     for j in range(1, len(target) + 1):
         for i in range(1, len(source) + 1):
             if source[i - 1] == target[j - 1]:
-                d[i][j] = d[i - 1][j - 1]
+                d[i][j] = min([d[i][j - 1] + 1, d[i - 1][j] + 1, d[i - 1][j - 1] + 0])
             else:
-                d[i][j] = min([d[i][j - 1] + 2, d[i - 1][j] + 1, d[i - 1][j - 1] + 3])
-    print_table(d)
+                d[i][j] = min([d[i][j - 1] + 1, d[i - 1][j] + 1, d[i - 1][j - 1] + 2])
+    # print_table(d)
     get_path(source, target, d)
 
 
@@ -82,12 +82,12 @@ def get_path(source, target, d):
 
 
 print()
-# initialize("naruto's son", "boruto's dad")
-# initialize("kumakain", "kumain")
-# initialize("levinstien", "levenshtein")
+initialize("naruto's son", "boruto's dad")
+initialize("kumakain", "kumain")
+initialize("levinstien", "levenshtein")
 initialize("leviathan", "levenshtein")
-# initialize("ATGCATCCCATGAC", "TCTATATCCGT")
-# initialize("AGGCTATCACCTGACCTCCAGGCCGATGCCCACCTGG", "TAGCTATCACGACCGCGGTCGATTTGCCCGACGGTCC")
+initialize("ATGCATCCCATGAC", "TCTATATCCGT")
+initialize("AGGCTATCACCTGACCTCCAGGCCGATGCCCACCTGG", "TAGCTATCACGACCGCGGTCGATTTGCCCGACGGTCC")
 
 # ==============FOR FULL PTS
 # Implement the base version (1-1-2-0 weighting) w/ backtrace discussed in class
