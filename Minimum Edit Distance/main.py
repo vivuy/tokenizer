@@ -18,7 +18,7 @@ def compute(source, target, d):
                 d[i][j] = d[i - 1][j - 1]
             else:
                 d[i][j] = min([d[i][j - 1] + 2, d[i - 1][j] + 1, d[i - 1][j - 1] + 3])
-    # print_table(d)
+    print_table(d)
     get_path(source, target, d)
 
 
@@ -44,13 +44,13 @@ def get_path(source, target, d):
         else:
             if i < 0 or j < 0:
                 if i < 0:
-                    num1 = 0
+                    num1 = d[i][j - 1] * 2
                     num2 = d[i][j - 1]
-                    num3 = 0
+                    num3 = d[i][j - 1] * 2
                 elif j < 0:
                     num1 = d[i - 1][j]
-                    num2 = 0
-                    num3 = 0
+                    num2 = d[i - 1][j] * 2
+                    num3 = d[i - 1][j] * 2
             else:
                 num1 = d[i - 1][j]
                 num2 = d[i][j - 1]
@@ -82,12 +82,12 @@ def get_path(source, target, d):
 
 
 print()
-initialize("naruto's son", "boruto's dad")
-initialize("kumakain", "kumain")
-initialize("levinstien", "levenshtein")
+# initialize("naruto's son", "boruto's dad")
+# initialize("kumakain", "kumain")
+# initialize("levinstien", "levenshtein")
 initialize("leviathan", "levenshtein")
-initialize("ATGCATCCCATGAC", "TCTATATCCGT")
-initialize("AGGCTATCACCTGACCTCCAGGCCGATGCCCACCTGG", "TAGCTATCACGACCGCGGTCGATTTGCCCGACGGTCC")
+# initialize("ATGCATCCCATGAC", "TCTATATCCGT")
+# initialize("AGGCTATCACCTGACCTCCAGGCCGATGCCCACCTGG", "TAGCTATCACGACCGCGGTCGATTTGCCCGACGGTCC")
 
 # ==============FOR FULL PTS
 # Implement the base version (1-1-2-0 weighting) w/ backtrace discussed in class
