@@ -17,13 +17,14 @@ def compute(source, target, d):
             if source[i - 1] == target[j - 1]:
                 d[i][j] = d[i - 1][j - 1]
             else:
-                d[i][j] = min([d[i][j - 1] + 1, d[i - 1][j] + 1, d[i - 1][j - 1] + 2])
+                d[i][j] = min([d[i][j - 1] + 2, d[i - 1][j] + 1, d[i - 1][j - 1] + 3])
+    # print_table(d)
     get_path(source, target, d)
 
 
-# def print_table():
-#     for i in range(len(D)):
-#         print(D[i])
+def print_table(d):
+    for i in range(len(d)):
+        print(d[i])
 
 
 def get_path(source, target, d):
@@ -34,25 +35,39 @@ def get_path(source, target, d):
     new_target = ""
 
     while not (i == 0 and j == 0):
-        if source[i - 1] == target[j - 1]:
+        if (i > 0 and j > 0) and (source[i - 1] == target[j - 1]):
             path += "M"
             new_source += source[i - 1]
             new_target += target[j - 1]
             i -= 1
             j -= 1
         else:
-            minimum = min(d[i - 1][j], d[i][j - 1], d[i - 1][j - 1])
-            if minimum == d[i - 1][j]:
+            if i < 0 or j < 0:
+                if i < 0:
+                    num1 = 0
+                    num2 = d[i][j - 1]
+                    num3 = 0
+                elif j < 0:
+                    num1 = d[i - 1][j]
+                    num2 = 0
+                    num3 = 0
+            else:
+                num1 = d[i - 1][j]
+                num2 = d[i][j - 1]
+                num3 = d[i - 1][j - 1]
+
+            minimum = min(num1, num2, num3)
+            if minimum == num1:
                 path += "D"
                 new_source += source[i - 1]
                 new_target += "-"
                 i -= 1
-            elif minimum == d[i][j - 1]:
+            elif minimum == num2:
                 path += "I"
                 new_source += "-"
                 new_target += target[j - 1]
                 j -= 1
-            elif minimum == d[i - 1][j - 1]:
+            elif minimum == num3:
                 path += "S"
                 new_source += source[i - 1]
                 new_target += target[j - 1]
